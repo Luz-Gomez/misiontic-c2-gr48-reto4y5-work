@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.utp.misiontic2022.c2.model.vo.ComprasDeLiderVo;
+import co.edu.utp.misiontic2022.c2.model.vo.ProyectoBancoVo;
 import co.edu.utp.misiontic2022.c2.util.JDBCUtilities;
 
-public class ComprasDeLiderDao {
+public class ProyectoBancoDao {
 
-    public List<ComprasDeLiderVo> consultaComprasPorBanco(String banco) throws SQLException {
-        List<ComprasDeLiderVo> listado = new ArrayList<>();
+    public List<ProyectoBancoVo> consultaProyectoBanco(String banco) throws SQLException {
+        List<ProyectoBancoVo> listado = new ArrayList<>();
 
         var conectar = JDBCUtilities.getConnection();
         PreparedStatement sentencia = null;
@@ -31,7 +31,7 @@ public class ComprasDeLiderDao {
                 resultado = sentencia.executeQuery();
                 
                 while (resultado.next()) {
-                    var datosVo = new ComprasDeLiderVo();
+                    var datosVo = new ProyectoBancoVo();
                     datosVo.setId(resultado.getInt("ID"));
                     datosVo.setConstructora(resultado.getString("CONSTRUCTORA"));
                     datosVo.setCiudad(resultado.getString("CIUDAD"));

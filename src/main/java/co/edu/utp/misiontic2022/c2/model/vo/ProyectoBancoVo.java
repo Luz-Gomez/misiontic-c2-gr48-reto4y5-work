@@ -1,6 +1,6 @@
 package co.edu.utp.misiontic2022.c2.model.vo;
 // Consultas de compras de lider por Banco
-public class ComprasDeLiderVo {
+public class ProyectoBancoVo {
     private Integer id;
     private String constructora;
     private String ciudad;
@@ -46,10 +46,7 @@ public class ComprasDeLiderVo {
     }
     @Override
     public String toString() {
-        return "ComprasDeLiderVo [ciudad=" + ciudad + ", clasificacion=" + clasificacion + ", constructora="
-                + constructora + ", estrato=" + estrato + ", id=" + id + ", lider=" + lider + "]";
+        return "ProyectoBancoVo [id=" + id + ", constructora="
+        + constructora + ", ciudad=" + ciudad + ", clasificacion=" + clasificacion +  ", estrato=" + estrato + ",  lider=" + lider + "]";
     }
-
-    
-
 }
