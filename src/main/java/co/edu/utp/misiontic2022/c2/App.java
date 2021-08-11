@@ -1,10 +1,11 @@
 package co.edu.utp.misiontic2022.c2;
-
+/**
 import java.sql.SQLException;
 import co.edu.utp.misiontic2022.c2.controller.ConsultasController;
 import co.edu.utp.misiontic2022.c2.model.dao.ProyectoBancoDao;
 import co.edu.utp.misiontic2022.c2.model.vo.ProyectoBancoVo;
 import co.edu.utp.misiontic2022.c2.util.JDBCUtilities;
+*/
 import co.edu.utp.misiontic2022.c2.view.ReportesView;
 
 public class App 
