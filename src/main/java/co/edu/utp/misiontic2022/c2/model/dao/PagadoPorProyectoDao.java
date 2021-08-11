@@ -24,7 +24,7 @@ public class PagadoPorProyectoDao {
                 + "c.ID_MaterialConstruccion "
                 + "WHERE c.Pagado = 'Si' "
                 + "GROUP BY p.ID_Proyecto "
-                + "HAVING SUM(c.Cantidad*mc.Precio_Unidad) > ? "
+                + "HAVING SUM(c.Cantidad * mc.Precio_Unidad) > ? "
                 + "ORDER BY VALOR DESC";
 
                 sentencia = conectar.prepareStatement(consulta);
@@ -50,5 +50,4 @@ public class PagadoPorProyectoDao {
             }
             return listado;
     }
-
 }

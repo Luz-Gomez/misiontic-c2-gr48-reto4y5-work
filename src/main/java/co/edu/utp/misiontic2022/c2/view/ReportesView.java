@@ -2,6 +2,7 @@ package co.edu.utp.misiontic2022.c2.view;
 
 import java.sql.SQLException;
 import co.edu.utp.misiontic2022.c2.controller.ConsultasController;
+import co.edu.utp.misiontic2022.c2.model.vo.ComprasDeLiderVo;
 import co.edu.utp.misiontic2022.c2.model.vo.PagadoPorProyectoVo;
 import co.edu.utp.misiontic2022.c2.model.vo.ProyectoBancoVo;
 
@@ -50,20 +51,24 @@ public class ReportesView {
             var lista = consultasController.listaPagadoPorProyecto(limiteInferior);
             for (PagadoPorProyectoVo proyecto : lista) {
                 System.out.printf(String.format("%3s %15s %n", proyecto.getId(), proyecto.getValor()));
-    
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
     } 
-/**  
+
     public void lideresQueMenosGastan() {
-        System.out.println(repitaCaracter('=', 5) + " 10 LIDERES MENOS COMPRADORES " + 
+        try {
+            System.out.println(repitaCaracter('=', 5) + " 10 LIDERES MENOS COMPRADORES " + 
             repitaCaracter('=', 6)); 
-        System.out.println(String.format("%-25s %15s", "LIDER", "VALOR ")); 
-        System.out.println(repitaCaracter('-', 41)); 
-        // TODO Imprimir en pantalla la información de los líderes 
+            System.out.println(String.format("%-25s %15s", "LIDER", "VALOR ")); 
+            System.out.println(repitaCaracter('-', 41)); 
+            var lista = consultasController.listaComprasDeLider();
+            for (ComprasDeLiderVo proyecto : lista) {
+                System.out.printf(String.format("%-25s %15s %n",proyecto.getLider(),proyecto.getValor()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     } 
-*/
 }
