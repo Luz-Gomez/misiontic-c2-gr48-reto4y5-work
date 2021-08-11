@@ -13,6 +13,7 @@ public class App
     {
         var vista = new ReportesView();
         vista.proyectosFinanciadosPorBanco("Davivienda");
+        vista.totalPagadoPorProyectosSuperioresALimite(50_000d);
     }
     /**
         try {

@@ -2,6 +2,7 @@ package co.edu.utp.misiontic2022.c2.view;
 
 import java.sql.SQLException;
 import co.edu.utp.misiontic2022.c2.controller.ConsultasController;
+import co.edu.utp.misiontic2022.c2.model.vo.PagadoPorProyectoVo;
 import co.edu.utp.misiontic2022.c2.model.vo.ProyectoBancoVo;
 
 public class ReportesView {
@@ -37,18 +38,26 @@ public class ReportesView {
             e.printStackTrace();
         } 
     } 
-/**    
 
     public void totalPagadoPorProyectosSuperioresALimite(Double limiteInferior) { 
-        System.out.println(repitaCaracter('=', 1) + " TOTAL PAGADO POR PROYECTO " + 
+        try {
+            System.out.println(repitaCaracter('=', 1) + " TOTAL PAGADO POR PROYECTO " + 
             repitaCaracter('=', 1)); 
-        if (limiteInferior != null) {
-            System.out.println(String.format("%3s %15s", "ID", "VALOR ")); 
-            System.out.println(repitaCaracter('-', 29)); 
-            // TODO Imprimir en pantalla la información del total pagado 
-        } 
-    } 
+            if (limiteInferior != null) {
+                System.out.println(String.format("%3s %15s", "ID", "VALOR ")); 
+                System.out.println(repitaCaracter('-', 29)); 
+            } 
+            var lista = consultasController.listaPagadoPorProyecto(limiteInferior);
+            for (PagadoPorProyectoVo proyecto : lista) {
+                System.out.printf(String.format("%3s %15s %n", proyecto.getId(), proyecto.getValor()));
     
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    } 
+/**  
     public void lideresQueMenosGastan() {
         System.out.println(repitaCaracter('=', 5) + " 10 LIDERES MENOS COMPRADORES " + 
             repitaCaracter('=', 6)); 
