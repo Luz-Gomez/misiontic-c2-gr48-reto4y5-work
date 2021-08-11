@@ -295,6 +295,7 @@ class ReportesView {
                     proyecto.getEstrato(), proyecto.getLider());
             }
         } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         } 
     } 
@@ -304,7 +305,7 @@ class ReportesView {
             System.out.println(repitaCaracter('=', 1) + " TOTAL PAGADO POR PROYECTO " + 
             repitaCaracter('=', 1)); 
             if (limiteInferior != null) {
-                System.out.println(String.format("%3s %15s", "ID", "VALOR ")); 
+                System.out.println(String.format("%3s %15s", "ID", "VALOR  ")); 
                 System.out.println(repitaCaracter('-', 29)); 
             } 
             var lista = consultasController.listaPagadoPorProyecto(limiteInferior);
@@ -312,6 +313,7 @@ class ReportesView {
                 System.out.printf("%3d %,15.1f %n", proyecto.getId(), proyecto.getValor());
             }
         } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
     } 
@@ -320,13 +322,14 @@ class ReportesView {
         try {
             System.out.println(repitaCaracter('=', 5) + " 10 LIDERES MENOS COMPRADORES " + 
             repitaCaracter('=', 6)); 
-            System.out.println(String.format("%-25s %15s", "LIDER", "VALOR ")); 
+            System.out.println(String.format("%-25s %15s", "LIDER", "VALOR  ")); 
             System.out.println(repitaCaracter('-', 41)); 
             var lista = consultasController.listaComprasDeLider();
             for (ComprasDeLiderVo proyecto : lista) {
                 System.out.printf("%-25s %,15.1f %n", proyecto.getLider(), proyecto.getValor());
             }
         } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
     } 
