@@ -46,7 +46,6 @@ public class ProyectoBancoVo {
     }
     @Override
     public String toString() {
-        return "ProyectoBancoVo [id=" + id + ", constructora="
-        + constructora + ", ciudad=" + ciudad + ", clasificacion=" + clasificacion +  ", estrato=" + estrato + ",  lider=" + lider + "]";
+        return "ProyectoBancoVo [id=" + id + ", constructora= " + constructora + ", ciudad=" + ciudad + ", clasificacion=" + clasificacion +  ", estrato=" + estrato + ",  lider=" + lider + "]";
     }
 }

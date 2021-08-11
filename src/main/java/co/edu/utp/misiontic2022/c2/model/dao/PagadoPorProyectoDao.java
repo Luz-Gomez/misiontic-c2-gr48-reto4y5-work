@@ -48,6 +48,6 @@ public class PagadoPorProyectoDao {
                     conectar.close();
                 }
             }
-            return listado;
+        return listado;
     }
 }

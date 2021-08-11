@@ -32,8 +32,8 @@ public class ReportesView {
             var lista = consultasController.listaProyectoBanco(banco);
             for (ProyectoBancoVo proyecto : lista) {
                 System.out.printf("%3d %-25s %-20s %-15s %7d %-30s %n", proyecto.getId(), 
-                    proyecto.getConstructora(), proyecto.getCiudad(), proyecto.getClasificacion(),
-                    proyecto.getEstrato(), proyecto.getLider());
+                    proyecto1.getConstructora(), proyecto.getCiudad(), proyecto.getClasificacion(),
+                    proyecto1.getEstrato(), proyecto.getLider());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class ReportesView {
             } 
             var lista = consultasController.listaPagadoPorProyecto(limiteInferior);
             for (PagadoPorProyectoVo proyecto : lista) {
-                System.out.printf(String.format("%3s %15s %n", proyecto.getId(), proyecto.getValor()));
+                System.out.printf("%3d %15.2f %n", proyecto.getId(), proyecto.getValor());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class ReportesView {
             System.out.println(repitaCaracter('-', 41)); 
             var lista = consultasController.listaComprasDeLider();
             for (ComprasDeLiderVo proyecto : lista) {
-                System.out.printf(String.format("%-25s %15s %n",proyecto.getLider(),proyecto.getValor()));
+                System.out.printf("%-25s %15.2f %n", proyecto.getLider(), proyecto.getValor());
             }
         } catch (SQLException e) {
             e.printStackTrace();
