@@ -90,6 +90,26 @@ public class FrmReto5 extends JFrame {
         }
 
         @Override
+        public String getColumnName(int column) {
+            switch (column) {
+                case 0:
+                    return "ID";
+                case 1:
+                    return "CONSTRUCTORA";
+                case 2:
+                    return "CIUDAD";
+                case 3:
+                    return "CLASIFICACION";
+                case 4:
+                    return "ESTRATO";
+                case 5:
+                    return "LIDER";
+
+            }
+            return super.getColumnName(column);
+        }
+
+        @Override
         public int getRowCount() {
             return data.size();
         }
@@ -106,7 +126,7 @@ public class FrmReto5 extends JFrame {
                 case 0:
                     return proyecto.getId();
                 case 1:
-                    return proyecto.getConstructora(),
+                    return proyecto.getConstructora();
                 case 2:
                     return proyecto.getCiudad();
                 case 3:
