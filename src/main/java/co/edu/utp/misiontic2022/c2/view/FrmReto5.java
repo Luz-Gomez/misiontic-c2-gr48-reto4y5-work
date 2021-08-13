@@ -1,6 +1,9 @@
 package co.edu.utp.misiontic2022.c2.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
 import co.edu.utp.misiontic2022.c2.controller.ConsultasController;
@@ -24,39 +26,53 @@ public class FrmReto5 extends JFrame {
 
     private ConsultasController controller;
     private JTable tabla;
+    private JComboBox<String> comboBox;
 
     public FrmReto5() {
         controller = new ConsultasController();
-        iniciarUI();
+        iniciarComponentes();
         setLocationRelativeTo(null);
     }
 
-    private void iniciarUI() {
+    // Se inicializan componentes del Frame
+
+    private void iniciarComponentes() {
         setTitle("Misión TIC 2022 UTP - Reto 5");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
 
-        var tbd = new JTabbedPane();
-        getContentPane().add(tbd, BorderLayout.CENTER);
+        var tbd1 = new JTabbedPane();
+        getContentPane().add(tbd1, BorderLayout.CENTER);
 
-        var panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        tbd.addTab("Proyectos Financiados Por Banco", panel);
+        var panel1 = new JPanel();
+        panel1.setLayout(new BorderLayout());
+        tbd1.addTab("Proyectos Financiados Por Banco", panel1);
 
         var panelVariable = new JPanel();
-        panelVariable.add(new JLabel("Banco"));
-        var txtBanco = new JTextField(15);
-        panelVariable.add(txtBanco);
+        panelVariable.add(new JLabel(" Banco "));
+
+        var label = new JLabel(" Seleccione un Banco ");
+        panelVariable.add(label);
+
+        comboBox = new JComboBox<>();
+        panelVariable.add(comboBox);
+        LoadBancos(); 
+        // Accion a realizar cuando el JComboBox cambia de item seleccionado.
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            label.setText(comboBox.getSelectedItem().toString());
+        }});
 
         var btnConsulta = new JButton("Consultar");
-        btnConsulta.addActionListener(e -> consutarProyectosPorBanco(txtBanco.getText().trim()));
+        btnConsulta.addActionListener(e -> consutarProyectosPorBanco(label.getText().trim()));
         panelVariable.add(btnConsulta);
-        panel.add(panelVariable, BorderLayout.PAGE_START);
+        panel1.add(panelVariable, BorderLayout.PAGE_START);
 
         tabla = new JTable();
-        panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
+        panel1.add(new JScrollPane(tabla), BorderLayout.CENTER);
     }
-        
+
     private void consutarProyectosPorBanco(String dato){
         try {
             var lista = controller.listaProyectoBanco(dato);
@@ -137,6 +153,19 @@ public class FrmReto5 extends JFrame {
                     return proyecto.getLider();
             }
             return null;
+        }
+    }
+    public void LoadBancos() {
+        // Trae los bancos del Controller y los carga en el ComboBox
+        comboBox.addItem("");
+        try {
+            var lista = controller.listaBancos();
+            for (int i = 0; i < lista.size(); i++){
+                comboBox.addItem(lista.get(i).getBanco());
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), getTitle(), 
+                JOptionPane.ERROR_MESSAGE);
         }
     }
 }
