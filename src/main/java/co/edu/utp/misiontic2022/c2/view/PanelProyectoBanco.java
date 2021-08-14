@@ -3,60 +3,37 @@ package co.edu.utp.misiontic2022.c2.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.sql.SQLException;
 import java.util.List;
-
+import javax.swing.table.AbstractTableModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 
 import co.edu.utp.misiontic2022.c2.controller.ConsultasController;
 import co.edu.utp.misiontic2022.c2.model.vo.ProyectoBancoVo;
 
-public class FrmReto5 extends JFrame {
-
+public class PanelProyectoBanco extends JPanel {
     private ConsultasController controller;
     private JTable tabla;
     private JComboBox<String> comboBox;
 
-    public FrmReto5() {
+    public PanelProyectoBanco() {
         controller = new ConsultasController();
-        iniciarComponentes();
-        setLocationRelativeTo(null);
-    }
 
-    // Se inicializan componentes del Frame
-
-    private void iniciarComponentes() {
-        setTitle("Misión TIC 2022 UTP - Reto 5");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 600);
-
-        var tbd1 = new JTabbedPane();
-        getContentPane().add(tbd1, BorderLayout.CENTER);
-
-        var panel1 = new JPanel();
-        panel1.setLayout(new BorderLayout());
-        tbd1.addTab("Proyectos Financiados Por Banco", panel1);
-
+        setLayout(new BorderLayout());
         var panelVariable = new JPanel();
-        panelVariable.add(new JLabel(" Banco "));
-
-        var label = new JLabel(" Seleccione un Banco ");
+    
+        var label = new JLabel("Seleccione un Banco   ");
         panelVariable.add(label);
 
         comboBox = new JComboBox<>();
         panelVariable.add(comboBox);
-        LoadBancos(); 
+        loadBancos(); 
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
         comboBox.addActionListener(new ActionListener() {
             @Override
@@ -66,11 +43,12 @@ public class FrmReto5 extends JFrame {
 
         var btnConsulta = new JButton("Consultar");
         btnConsulta.addActionListener(e -> consutarProyectosPorBanco(label.getText().trim()));
+        
         panelVariable.add(btnConsulta);
-        panel1.add(panelVariable, BorderLayout.PAGE_START);
+        add(panelVariable, BorderLayout.PAGE_START);
 
         tabla = new JTable();
-        panel1.add(new JScrollPane(tabla), BorderLayout.CENTER);
+        add(new JScrollPane(tabla), BorderLayout.CENTER);
     }
 
     private void consutarProyectosPorBanco(String dato){
@@ -80,13 +58,14 @@ public class FrmReto5 extends JFrame {
             tableModel.setData(lista);
             tabla.setModel(tableModel);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), getTitle(), 
+            JOptionPane.showMessageDialog(this, e.getMessage(), getName(), 
                 JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     private class ProyectoTableModel extends AbstractTableModel {
         private List<ProyectoBancoVo> data;
-        
+    
         public void setData(List<ProyectoBancoVo> data) {
             this.data = data;
         }
@@ -109,7 +88,7 @@ public class FrmReto5 extends JFrame {
         public String getColumnName(int column) {
             switch (column) {
                 case 0:
-                    return "ID";
+                    return "ID PROYECTO";
                 case 1:
                     return "CONSTRUCTORA";
                 case 2:
@@ -120,7 +99,6 @@ public class FrmReto5 extends JFrame {
                     return "ESTRATO";
                 case 5:
                     return "LIDER";
-
             }
             return super.getColumnName(column);
         }
@@ -155,7 +133,7 @@ public class FrmReto5 extends JFrame {
             return null;
         }
     }
-    public void LoadBancos() {
+    public void loadBancos() {
         // Trae los bancos del Controller y los carga en el ComboBox
         comboBox.addItem("");
         try {
@@ -164,7 +142,7 @@ public class FrmReto5 extends JFrame {
                 comboBox.addItem(lista.get(i).getBanco());
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), getTitle(), 
+            JOptionPane.showMessageDialog(this, e.getMessage(), getName(), 
                 JOptionPane.ERROR_MESSAGE);
         }
     }
